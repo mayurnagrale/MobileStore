@@ -1,0 +1,50 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Add User</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<div class="container mt-5">
+	<div class="row justify-content-center align-items=-enter">
+		<div class="col-sm-12 col-md-12 col-lg-4">
+			<h1 class="mb-3">Mobile-Store-Add Record</h1>
+             <form method="post" asp-action="ModifyRecords1">
+            <div class="mb-2">
+                <label class="form-label" for="mobileModel">MobileModel:</label>
+                <input class="form-control" type="text" id="mobileModel" name="mobileModel" required>
+            </div>
+            <div class="mb-2">
+                <label class="form-label" for="mobileBrand">MobileBrand:</label>
+                <input class="form-control" type="text" id="mobileBrand" name="mobileBrand" required>
+            </div>
+            <div class="mb-2">
+                <label class="form-label" for="quantitySold">QuantitySold:</label>
+                <input class="form-control" type="text" id="quantitySold" name="quantitySold" required>
+            </div>
+            <div class="mb-2">
+                <label class="form-label" for="salesPrice">SalesPrice:</label>
+                <input class="form-control" type="text" id="salesPrice" name="salesPrice" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="discount">Discount:</label>
+                <input class="form-control" type="text" id="discount" name="discount" required>
+            </div>
+            
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">Modify Record</button>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

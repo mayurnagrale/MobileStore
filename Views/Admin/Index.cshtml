@@ -1,0 +1,46 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<User>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User List</title>
+</head>
+<body>
+    <h1>User List</h1>
+    <a class="btn-primary" href='/Admin/AddUser'>New User</a>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Role</th>
+            <th></th>
+        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.Username</td>
+                <td>@user.Password</td>
+                <td>
+                    @if ( @user.Roles != null)
+                    {
+                        @user.Roles.FirstOrDefault().RoleName
+                    }
+                </td>
+                <td><a class="btn-primary" href='/Admin/ModifyUser?id=@user.Id'>Edit</a></td>
+                @if(@user.Id != 1)
+                {
+                    <td><a class="btn-danger" href="@Url.Action("DeleteUser","Admin",new{@user.Id})">Delete</a></td>
+                }
+            </tr>
+        }
+    </table> 
+</body>
+</html>

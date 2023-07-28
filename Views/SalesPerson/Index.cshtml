@@ -1,0 +1,48 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<SaleRecord>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sale Record</title>
+</head>
+<body>
+    <h1>User List</h1>
+    <a class="btn-primary" href='/SalesPerson/AddRecord'>Add Record</a>
+    <table>
+        <tr>
+            <th>Sale ID</th>
+            <th>Mobile Brand</th>
+            <th>Mobile Model</th>
+            <th>Quantity Sold</th>
+            <th>Sales Price</th>
+            <th>Discount</th>
+        </tr>
+        @foreach (var record in Model)
+        {
+            <tr>
+                <td>@record.SaleId</td>
+                <td>@record.MobileBrand</td>
+                <td>@record.MobileModel</td>
+                <td>@record.QuantitySold</td>
+                <td>@record.SalesPrice</td>
+                <td>@record.Discount</td>
+                <td><a class="btn-primary" href='/SalesPerson/ModifyRecord?SaleId=@record.SaleId'>Edit</a></td>
+                <td><a class="btn-danger" href="@Url.Action("DeleteRecord","SalesPerson",new{@record.SaleId})">Delete</a></td>
+            </tr>
+        }
+    </table> 
+</body>
+</html>
