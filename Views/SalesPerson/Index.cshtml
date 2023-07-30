@@ -4,12 +4,6 @@
 @{
 }
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
-
 @model List<SaleRecord>
 
 
@@ -23,24 +17,28 @@
     <a class="btn-primary" href='/SalesPerson/AddRecord'>Add Record</a>
     <table>
         <tr>
-            <th>Sale ID</th>
-            <th>Mobile Brand</th>
-            <th>Mobile Model</th>
-            <th>Quantity Sold</th>
-            <th>Sales Price</th>
-            <th>Discount</th>
+            <th class="p-2">Sale ID</th>
+            <th class="p-2">Mobile Brand</th>
+            <th class="p-2">Mobile Model</th>
+            <th class="p-2">Quantity Sold</th>
+            <th class="p-2">Sales Price</th>
+            <th class="p-2">Discount</th>
+            <th class="p-2">SaleDate</th>
+            <th class="p-2">UserID</th>
         </tr>
         @foreach (var record in Model)
         {
             <tr>
-                <td>@record.SaleId</td>
-                <td>@record.MobileBrand</td>
-                <td>@record.MobileModel</td>
-                <td>@record.QuantitySold</td>
-                <td>@record.SalesPrice</td>
-                <td>@record.Discount</td>
-                <td><a class="btn-primary" href='/SalesPerson/ModifyRecord?SaleId=@record.SaleId'>Edit</a></td>
-                <td><a class="btn-danger" href="@Url.Action("DeleteRecord","SalesPerson",new{@record.SaleId})">Delete</a></td>
+                <td class="p-2">@record.SaleId</td>
+                <td class="p-2">@record.MobileBrand</td>
+                <td class="p-2">@record.MobileModel</td>
+                <td class="p-2">@record.QuantitySold</td>
+                <td class="p-2">@record.SalesPrice</td>
+                <td class="p-2">@record.Discount</td>
+                <td class="p-2">@record.SaleDate</td>
+                <td class="p-2">@record.User.UserId</td>
+                <td class="p-2"><a class="btn-primary" href='/SalesPerson/ModifyRecord?SaleId=@record.SaleId'>Edit</a></td>
+                <td class="p-2"><a class="btn-danger" href="@Url.Action("DeleteRecord","SalesPerson",new{@record.SaleId})">Delete</a></td>
             </tr>
         }
     </table> 

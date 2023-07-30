@@ -1,0 +1,71 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+@model List<SaleRecord>
+@using System.Globalization
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sale Report</title>
+</head>
+<body>
+    <h1>Monthly Sale Report</h1>
+    @using (Html.BeginForm("SelectMonth", "Report", FormMethod.Post))
+    {
+    <div>
+        <label for="selectedMonth">Select Month:</label>
+        @{
+            int selectedMonth = Model.Any() ? Model.First().SaleDate.Month : DateTime.Now.Month;
+        }
+        @Html.DropDownListFor(
+            model => selectedMonth,
+            new SelectList(Enumerable.Range(1, 12).Select(i => new { Id = i, Name = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(i) }), "Id", "Name"),
+            "All Months"
+        )
+
+        <label for="selectedBrand">Select Brand:</label>
+        @Html.DropDownList("selectedBrand", new SelectList(ViewBag.Brands), "All Brands")
+
+        @* Other filters or search inputs can be added here *@
+
+        <input type="submit" value="Filter"/>
+    </div>
+    }
+    <!-- Add Generate Report button -->
+@if (Model.Any())
+{
+    <div>
+        <a href="@Url.Action("GeneratePDF", new { selectedMonth = ViewBag.SelectedMonth })" target="_blank" >Generate Report</a>
+    </div>
+}
+    <table>
+        <tr>
+            <th>Sale ID</th>
+            <th>Mobile Brand</th>
+            <th>Mobile Model</th>
+            <th>Quantity Sold</th>
+            <th>Sales Price</th>
+            <th>Discount</th>
+            <th>SaleDate</th>
+        </tr>
+        @foreach (var record in Model)
+        {
+            <tr>
+                <td>@record.SaleId</td>
+                <td>@record.MobileBrand</td>
+                <td>@record.MobileModel</td>
+                <td>@record.QuantitySold</td>
+                <td>@record.SalesPrice</td>
+                <td>@record.Discount</td>
+                <td>@record.SaleDate</td>
+            </tr>
+        }
+    </table> 
+</body>
+</html>
+

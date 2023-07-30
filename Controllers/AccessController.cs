@@ -42,7 +42,7 @@ namespace MobileStore.Controllers
 
                 var user = _context.Users
                    .Include(u => u.Roles) // Include the Roles navigation property
-                   .FirstOrDefault(u => u.Id == user1.Id);
+                   .FirstOrDefault(u => u.UserId == user1.UserId);
 
                 if (user != null)
                 {

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MobileStore.Data;
 using MobileStore.Models;
 
@@ -14,22 +15,28 @@ namespace MobileStore.Controllers
         {
             _context = context;
         }
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             List<User> User1 = new List<User>();
             users = _context.Users.ToList();
             foreach (var item in users)
             {
-                var roles = _context.Roles.Find(item.Id);
-                var newuser = new User
+                //var roles = _context.Roles.Find(item.UserId);
+                var user = _context.Users
+                   .Include(u => u.Roles) // Include the Roles navigation property
+                   .FirstOrDefault(u => u.UserId == item.UserId);
+                //var newuser = new User
+                //{
+                //    UserId = item.UserId,
+                //    Username = item.Username,
+                //    Password = item.Password,
+                //};
+                //newuser.Roles.Add(roles);
+                if(user != null)
                 {
-                    Id = item.Id,
-                    Username = item.Username,
-                    Password = item.Password,
-                };
-                newuser.Roles.Add(roles);
-                User1.Add(newuser);
+                    User1.Add(user);
+                }
 
             }
              return View(User1);

@@ -17,14 +17,12 @@ namespace MobileStore.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            // Configure your database connection here (e.g., SQL Server, SQLite, etc.)
             optionsBuilder.UseSqlServer(_config.GetConnectionString("MobileStoreCS"));
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Define relationships between entities here
+            // Relationship between user and role
             modelBuilder.Entity<User>()
                 .HasMany(u => u.Roles)
                 .WithMany()
@@ -41,6 +39,8 @@ namespace MobileStore.Data
             .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<SaleRecord>().HasKey(s => s.SaleId);
+            modelBuilder.Entity<SaleRecord>().Property(s => s.SaleId).ValueGeneratedOnAdd();
+
         }
 
         public User GetUserByUsernameAndPassword(string username, string password)
